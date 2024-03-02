@@ -1,5 +1,5 @@
 # 导入功能
-import lighteningrobot
+import lightningrobot
 
 import os
 import time
@@ -32,6 +32,6 @@ def main():
         raise SystemExit(0)
     print("[信息]正在启动项目...")
     if status == "Dev":
-            lighteningrobot.dev()
+            lightningrobot.dev()
     if status == "Normal":
-            lighteningrobot.start()
+            lightningrobot.start()

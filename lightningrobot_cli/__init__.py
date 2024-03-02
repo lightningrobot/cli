@@ -1,10 +1,7 @@
 # 导入功能
-import runbot
-import install
-import create
+from . import runbot,install,create
 
 import sys
-from pip._internal import main
 
 logo = """\
       _      _       _     _         _             _____       _           _
@@ -17,16 +14,22 @@ logo = """\
            |___/                         |___/                             
 """
 
-if sys.argv[1] == "run":
+
+def main():
     print(logo)
-    runbot.main()
-if sys.argv[1] == "create":
-    print(logo)
-    create.main()
-if sys.argv[1] == "install":
-    print(logo)
-    name = sys.argv[3]
-    if sys.argv[2] == "adapter":
-        install.main(1,name)
-    if sys.argv[2] == "plugin":
-        install.main(2,name)
+    print("\033[1m⚡闪电机器人⚡\033[0m")
+    if sys.argv[1] == "run":
+        runbot.main()
+    if sys.argv[1] == "create":
+        create.main()
+    if sys.argv[1] == "version":
+        print("0.1.6")
+    if sys.argv[1] == "install":
+        name = sys.argv[3]
+        if sys.argv[2] == "adapter":
+            install.main(1,name)
+        if sys.argv[2] == "plugin":
+            install.main(2,name)
+
+if __name__ == "__main__":
+    main()
