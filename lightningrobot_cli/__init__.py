@@ -23,7 +23,7 @@ def main():
     if sys.argv[1] == "create":
         create.main()
     if sys.argv[1] == "version":
-        print("0.1.6")
+        print("1.0.0")
     if sys.argv[1] == "install":
         name = sys.argv[3]
         if sys.argv[2] == "adapter":
