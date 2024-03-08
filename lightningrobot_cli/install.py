@@ -1,6 +1,7 @@
 import requests
 import os
 import pip._internal
+from lightningrobot import log
 def get_latest_package_version(package_name):
     url = f'https://pypi.org/pypi/{package_name}/json'
     response = requests.get(url)
@@ -29,11 +30,13 @@ def main(conmand,name):
         pip._internal.main(['install', adapter])
         path = f"adapters/{adapter}"
         os.makedirs(path)
-        adapter_url = get_package_config(adapter)
-        print(f"[信息]成功安装适配器包 {adapter}！（来源：PyPI）")
+        config = requests.get("https://lightningrobot.github.io/store/adapter/"+name)
+        with open(name+'config.toml', 'wb') as f:
+            f.write(config.content)
+        log.info(f"成功安装适配器包 {adapter}！（来源：PyPI）")
     if conmand == 2:
         plugin = f"lighteningrobot-plugin-" + name
         pip._internal.main(['install', plugin])
         path = f"plugins/{plugin}"
         os.makedirs(path)
-        print(f"[信息]成功安装插件 {name}！（来源：PyPI）")
+        log.info(f"成功安装插件 {name}！（来源：PyPI）")

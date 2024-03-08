@@ -1,5 +1,5 @@
 # 导入所需模块
-import install
+from lightningrobot_cli import install
 import requests
 import zipfile
 import os
