@@ -1,9 +1,10 @@
 # 导入功能
-from . import runbot,install,create
+import runbot,install,create
 
+import click
 import sys
 
-logo = """\
+logo = r"""
       _      _       _     _         _             _____       _           _
      | |    (_)     | |   | |       (_)           |  __ \     | |         | |
      | |     _  __ _| |__ | |_ _ __  _ _ __   __ _| |__) |___ | |__   ___ | |_ 
@@ -14,22 +15,31 @@ logo = """\
            |___/                         |___/                             
 """
 
+@click.command()
+@click.argument('action', type=click.Choice(['run', 'create','version','install']))
+@click.argument('type', type=str)
+@click.argument('name', type=str)
 
-def main():
+
+def main(action, type, name):
     print(logo)
     print("\033[1m⚡闪电机器人⚡\033[0m")
-    if sys.argv[1] == "run":
+    if action == 'run' :
         runbot.main()
-    if sys.argv[1] == "create":
+    elif action == 'create':
         create.main()
-    if sys.argv[1] == "version":
+    elif action == 'version':
         print("1.0.0")
-    if sys.argv[1] == "install":
-        name = sys.argv[3]
-        if sys.argv[2] == "adapter":
+    elif sys.argv[1] == "install":
+        if type == 'adapter':
             install.main(1,name)
-        if sys.argv[2] == "plugin":
+        elif type == 'plugin': 
             install.main(2,name)
+        else :
+            print("Invalid action for 'run'. Please use 'build' or 'release'.") 
+    elif not action:
+        print("未传入参数，请输入 'run' 或 'create'")
+
 
 if __name__ == "__main__":
     main()

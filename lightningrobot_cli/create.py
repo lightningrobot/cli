@@ -1,5 +1,5 @@
 # 导入所需模块
-from . import install
+import install
 import requests
 import zipfile
 import os

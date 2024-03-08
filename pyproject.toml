@@ -1,6 +1,6 @@
 [project]
 name = "lightningrobot-cli"
-version = "0.1.7"
+version = "0.1.8"
 description = "闪电机器人官方脚手架。"
 readme = "README.md"
 requires-python = ">=3.13"
@@ -8,6 +8,7 @@ license = {file = "LICENSE.txt"}
 keywords = ["cli", "lightningrobot", "bot"]
 authors = [
   {name = "ZhiHan", email = "zhihan@outlook.com" }
+  {name = "NoNameGMM", email = "nonamegmm@qq.com" }
 ]
 classifiers = [
   "License :: MIT License",
