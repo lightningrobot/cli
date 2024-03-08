@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lightningrobot-cli"
-version = "0.1.8"
+version = "0.1.9"
 description = "闪电机器人官方脚手架。"
 authors = [
     "ZhiHan <zhihan2727@hotmail.com>",
@@ -11,14 +11,15 @@ readme = "README.md"
 homepage = "https://lightningrobot.github.io"
 repository = "https://github.com/LightningRobot/cli/"
 documentation = "https://lightningrobot.github.io"
-keywords = ["cli", "lightningrobot", "bot"]
+keywords = ["cli", "lightningrobot", "bot","robot"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 click = "^0.0.1"
+lightningrobot = "^0.0.1"
 
 [tool.poetry.scripts]
-lrcli = "lightningrobot_cli:main"
+lrcli = "lightningrobot_cli:__init__"
 
 [build-system]
 requires = ["poetry-core"]
