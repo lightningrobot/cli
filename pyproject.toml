@@ -1,32 +1,24 @@
-[project]
+[tool.poetry]
 name = "lightningrobot-cli"
 version = "0.1.8"
 description = "闪电机器人官方脚手架。"
-readme = "README.md"
-requires-python = ">=3.13"
-license = {file = "LICENSE.txt"}
-keywords = ["cli", "lightningrobot", "bot"]
 authors = [
-  {name = "ZhiHan", email = "zhihan@outlook.com" }
-  {name = "NoNameGMM", email = "nonamegmm@qq.com" }
-]
-classifiers = [
-  "License :: MIT License",
-  "Programming Language :: Python :: 3.13",
-]
+    "ZhiHan <zhihan2727@hotmail.com>",
+    "NoNameGMM <nonamegmm@qq.com>"
+    ]
+license = "MIT"
+readme = "README.md"
+homepage = "https://lightningrobot.github.io"
+repository = "https://github.com/LightningRobot/cli/"
+documentation = "https://lightningrobot.github.io"
+keywords = ["cli", "lightningrobot", "bot"]
 
-dependencies = [
-  "requests"
-]
+[tool.poetry.dependencies]
+python = "^3.11"
 
-[project.urls]
-"Homepage" = "https://lightningrobot.github.io/"
-"Bug Reports" = "https://github.com/LightningRobot/cli/issues"
-"Source" = "https://github.com/LightningRobot/cli"
-
-[project.scripts]
+[tool.poetry.scripts]
 lrcli = "lightningrobot_cli:main"
 
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
