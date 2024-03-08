@@ -15,6 +15,7 @@ keywords = ["cli", "lightningrobot", "bot"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+click = "^0.0.1"
 
 [tool.poetry.scripts]
 lrcli = "lightningrobot_cli:main"
