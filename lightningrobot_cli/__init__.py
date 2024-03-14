@@ -14,6 +14,11 @@ logo = r"""
                 |___/                         |___/                             
 """
 
+# 封装打印Logo和标题的函数
+def print_logo():
+    print(logo)
+    print("\033[1m⚡闪电机器人⚡\033[0m")
+
 @click.group()
 def main():
     """
@@ -21,22 +26,12 @@ def main():
     """
     pass
 
-@main.command('run')
-def run_command():
-    """
-    运行机器人命令。
-    """
-    print(logo)
-    print("\033[1m⚡闪电机器人⚡\033[0m")
-    runbot.main()
-
 @main.command('create')
 def create_command():
     """
     创建新机器人项目命令。
     """
-    print(logo)
-    print("\033[1m⚡闪电机器人⚡\033[0m")
+    print_logo()
     create.main()
 
 @main.command('version')
@@ -44,8 +39,8 @@ def version_command():
     """
     显示当前版本信息。
     """
-    print(logo)
-    print("0.1.8")
+    print_logo()
+    print("0.1.9")
 
 @main.command('install')
 @click.argument('install_type', type=click.Choice(['adapter', 'plugin'], case_sensitive=False), required=True)
@@ -57,14 +52,16 @@ def install_command(install_type, name):
     :param install_type: 安装类型，可选 'adapter' 或 'plugin'。
     :param name: 要安装的适配器或插件的名称。
     """
-    print(logo)
-    print("\033[1m⚡闪电机器人⚡\033[0m")
-    if install_type == "adapter":
-        install.main(1, name)
-    elif install_type == "plugin":
-        install.main(2, name)
-    else:
-        log.error("选择的安装类型无效。请使用'adapter'或'plugin'。")
+    print_logo()
+    try:
+        if install_type.lower() == "adapter":
+            install.main(1, name)
+        elif install_type.lower() == "plugin":
+            install.main(2, name)
+        else:
+            log.error("选择的安装类型无效。请使用'adapter'或'plugin'。")
+    except Exception as e:
+        log.error(f"安装过程中出现错误: {str(e)}")
 
 if __name__ == "__main__":
     main()
