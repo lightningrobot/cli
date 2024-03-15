@@ -40,7 +40,7 @@ def version_command():
     显示当前版本信息。
     """
     print_logo()
-    print("0.1.9")
+    print("0.2.0")
 
 @main.command('install')
 @click.argument('install_type', type=click.Choice(['adapter', 'plugin'], case_sensitive=False), required=True)
