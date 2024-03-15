@@ -1,42 +1,32 @@
 import requests
-import os
 import pip._internal
 from lightningrobot import log
-def get_latest_package_version(package_name):
-    url = f'https://pypi.org/pypi/{package_name}/json'
-    response = requests.get(url)
 
-    if response.status_code == 200:
-        data = response.json()
-        return data['info']['version']
+# 添加一个通用的函数来处理 HTTP 请求
+async def fetch_json(url):
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()  # 若状态码非 200，则抛出异常
+        return response.json()
+    except requests.RequestException as e:
+        await log.error(f"请求错误: {e}")
+        return None
+
+async def get_latest_package_version(package_name):
+    url = f'https://pypi.org/pypi/{package_name}/json'
+    data = await fetch_json(url)
+    if data:
+        return data['info'].get('version')
     else:
-        print(f"Failed to fetch package info. Status code: {response.status_code}")
         return None
     
-def get_package_config(package_name):
-    url = f'https://pypi.org/pypi/{package_name}/json'
-    response = requests.get(url)
-
-    if response.status_code == 200:
-        data = response.json()
-        return data['home_page']
-    else:
-        print(f"Failed to fetch package info. Status code: {response.status_code}")
-        return None
-    
-def main(conmand,name):
-    if conmand == 1:
-        adapter = f"lighteningrobot-adapter-" + name
+async def main(command, name):
+    if command == 1:
+        adapter = f"lightningrobot-adapter-{name}"
         pip._internal.main(['install', adapter])
-        path = f"adapters/{adapter}"
-        os.makedirs(path)
-        config = requests.get("https://lightningrobot.github.io/store/adapter/"+name)
-        with open(name+'config.toml', 'wb') as f:
-            f.write(config.content)
-        log.info(f"成功安装适配器包 {adapter}！（来源：PyPI）")
-    if conmand == 2:
-        plugin = f"lighteningrobot-plugin-" + name
+        await log.info(f"成功安装适配器包 {adapter}！（来源：PyPI）")
+    elif command == 2:
+        plugin = f"lightningrobot-plugin-{name}"
         pip._internal.main(['install', plugin])
         path = f"plugins/{plugin}"
-        os.makedirs(path)
-        log.info(f"成功安装插件 {name}！（来源：PyPI）")
+        await log.info(f"成功安装插件 {plugin}！（来源：PyPI）")

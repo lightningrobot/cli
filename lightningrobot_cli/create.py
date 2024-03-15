@@ -38,7 +38,7 @@ def main():
     # 提示用户选择适配器并获取输入
     print("[询问]要使用哪个适配器")
     adaptername = input()
-    adapter_package = f"lighteningrobot-adapter-{adaptername}"
+    adapter_package = f"lightningrobot-adapter-{adaptername}"
     # 使用 pip 安装指定适配器
     pip._internal.main(['install', adapter_package])
     # 获取适配器配置信息
